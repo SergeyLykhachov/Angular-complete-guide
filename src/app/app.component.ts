@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'complete-guide';
+  isRecipesActive = true;
+
+  processHeaderEvent(event: boolean): void {
+    this.isRecipesActive = event;
+  }
 }
