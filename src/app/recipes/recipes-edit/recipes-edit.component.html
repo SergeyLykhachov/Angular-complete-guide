@@ -1,0 +1,9 @@
+<div>
+  <div *ngIf="!isEditMode; else createNewRecipe">
+    Create New Recipe Mode
+  </div>
+  <ng-template #createNewRecipe>
+    <h1>Edit Existing Recipe Mode: {{ isEditMode }}</h1>
+    <h1>Recipe ID: {{ id }}</h1>
+  </ng-template>
+</div>

@@ -1,14 +1,13 @@
-import { EventEmitter, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Recipe } from './recipe.model';
 import { Ingredient } from '../shared/ingredient.model';
-import {ShoppingListService} from '../shopping-list/shopping-list.service';
+import { ShoppingListService } from '../shopping-list/shopping-list.service';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RecipeService {
-
-  recipeSelectedEvent = new EventEmitter<Recipe>();
 
   private recipes = new Array<Recipe>(
     new Recipe(
@@ -59,11 +58,12 @@ export class RecipeService {
     return this.recipes.slice();
   }
 
-  onRecipeSelected(recipe: Recipe) {
-    this.recipeSelectedEvent.emit(recipe);
+  onShoppingItemsAdded(ingredients: Ingredient[]) {
+    this.shoppingListService.onShoppingItemsAdded(ingredients);
   }
 
-  onShoppingItemsAdded(ingrerdients: Ingredient[]) {
-    this.shoppingListService.onShoppingItemsAdded(ingrerdients);
+  getRecipeByIndex(index: number): Observable<Recipe> {
+    return of(this.recipes[index]);
   }
+
 }
