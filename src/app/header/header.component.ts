@@ -1,4 +1,5 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { DataStorageService } from '../shared/data-storage.service';
 
 @Component({
   selector: 'app-header',
@@ -7,7 +8,9 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
   @Output() recipesActiveEvent = new EventEmitter<boolean>();
-  constructor() { }
+
+
+  constructor(private dataStorageService: DataStorageService) {}
 
   ngOnInit(): void {
   }
@@ -18,6 +21,14 @@ export class HeaderComponent implements OnInit {
 
   setShoppingListActive(): void {
     this.recipesActiveEvent.emit(false);
+  }
+
+  saveData() {
+    this.dataStorageService.storeRecipes();
+  }
+
+  fetchData() {
+    this.dataStorageService.retrieveRecipes();
   }
 
 }
