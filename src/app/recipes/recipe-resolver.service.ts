@@ -3,7 +3,7 @@ import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/r
 import { Observable } from 'rxjs';
 import { DataStorageService } from '../shared/data-storage.service';
 import { Injectable } from '@angular/core';
-import { RecipeService } from '../shared/recipe.service';
+import { RecipeService } from './recipe.service';
 
 @Injectable()
 export class RecipeResolver implements Resolve<Recipe[]> {

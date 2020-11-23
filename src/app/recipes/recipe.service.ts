@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import {Observable, of, Subject} from 'rxjs';
-import { Recipe } from '../recipes/recipe.model';
+import { Recipe } from './recipe.model';
 import { ShoppingListService } from '../shopping-list/shopping-list.service';
-import { Ingredient } from './ingredient.model';
+import { Ingredient } from '../shared/ingredient.model';
 
 @Injectable({
   providedIn: 'root'

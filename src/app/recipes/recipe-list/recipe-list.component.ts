@@ -3,7 +3,7 @@ import { Recipe } from '../recipe.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { DataStorageService } from '../../shared/data-storage.service';
-import { RecipeService } from '../../shared/recipe.service';
+import { RecipeService } from '../recipe.service';
 
 @Component({
   selector: 'app-recipe-list',
@@ -22,7 +22,6 @@ export class RecipeListComponent implements OnInit, OnDestroy {
     this.subscription = this.recipeService.getRecipeSubject()
       .subscribe(
         (recipes: Recipe[]) => {
-          console.log(recipes);
           this.recipes = recipes;
         });
   }

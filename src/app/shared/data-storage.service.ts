@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Recipe } from '../recipes/recipe.model';
 import { HttpClient } from '@angular/common/http';
-import { RecipeService } from './recipe.service';
+import { RecipeService } from '../recipes/recipe.service';
 import { map, tap } from 'rxjs/operators';
-import {Observable} from 'rxjs';
+import { Observable } from 'rxjs';
+import { AuthService } from '../auth.component/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,10 @@ export class DataStorageService {
 
   private url = 'https://angular-complete-guide-fff01.firebaseio.com/recipes.json';
 
-  constructor(private recipeService: RecipeService, private httpClient: HttpClient) {}
+  constructor(
+    private recipeService: RecipeService,
+    private httpClient: HttpClient
+  ) {}
 
   storeRecipes() {
     const recipes = this.recipeService.getRecipes();
@@ -25,11 +29,9 @@ export class DataStorageService {
         map(
           array => {
             return array.filter(recipe => recipe !== null)
-              .map(recipe => recipe.ingredients ? recipe : { ...recipe, ingredients: []});
-        }),
-        tap(
-          (recipes: Recipe[]) => this.recipeService.setRecipes(recipes)
-        )
+              .map(recipe => recipe.ingredients ? recipe : { ...recipe, ingredients: [] });
+          }),
+        tap((recipes: Recipe[]) => this.recipeService.setRecipes(recipes))
       );
   }
 
