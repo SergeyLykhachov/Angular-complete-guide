@@ -5,24 +5,31 @@
     </div>
     <div class="navbar-default">
       <ul class="nav navbar-nav">
-        <li routerLinkActive="active">
-          <a [routerLink]="['/recipes']"
-          >Recipes</a>
+        <li *ngIf="isAuthenticated"
+            routerLinkActive="active"
+        >
+          <a [routerLink]="['/recipes']">Recipes</a>
         </li>
-        <li routerLinkActive="active">
+        <li *ngIf="!isAuthenticated"
+          routerLinkActive="active"
+        >
           <a [routerLink]="['/auth']">Auth</a>
         </li>
         <li routerLinkActive="active">
-          <a [routerLink]="['/shopping_list']"
-          >Shopping List</a>
+          <a [routerLink]="['/shopping_list']">Shopping List</a>
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown" appDropdown>
+        <li *ngIf="isAuthenticated">
+          <a style="cursor: pointer;" (click)="onLogout()">Logout</a>
+        </li>
+        <li *ngIf="isAuthenticated"
+            class="dropdown" appDropdown
+        >
           <a class="dropdown-toggle" role="button">Manage <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a (click)="saveData()">Save Data</a></li>
-            <li><a (click)="fetchData()">Fetch Data</a></li>
+            <li><a style="cursor: pointer;" (click)="saveData()">Save Data</a></li>
+            <li><a style="cursor: pointer;" (click)="fetchData()">Fetch Data</a></li>
           </ul>
         </li>
       </ul>
